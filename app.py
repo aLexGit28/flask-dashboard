@@ -26,6 +26,18 @@ def dashboard():
     bar.update_traces(texttemplate='%{text}', textposition='outside', hoverinfo='x+y')
     bar_html = bar.to_html(full_html=False)
 
+    from_date = request.form.get('from_date')
+    to_date = request.form.get('to_date')
+
+    # Convert the Date column to datetime
+    df['Date'] = pd.to_datetime(df['Date'])
+
+    if from_date:
+        df = df[df['Date'] >= pd.to_datetime(from_date)]
+    if to_date:
+        df = df[df['Date'] <= pd.to_datetime(to_date)]
+
+
     return render_template('dashboard.html', pie_chart=pie_html, histogram=hist_html, bar_chart=bar_html)
 
 
