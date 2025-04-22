@@ -10,16 +10,14 @@
 
     <!-- Dropdown for category filter -->
     <form method="POST" action="/">
-        <label for="category">Choose a category:</label>
-        <select name="category" id="category">
-            <option value="all">All Categories</option>
-            <option value="Work">Work</option>
-            <option value="Sleep">Sleep</option>
-            <option value="Play">Play</option>
-            <!-- Add other categories as needed -->
-        </select>
-        <button type="submit">Filter</button>
+        <label><input type="checkbox" name="categories" value="Work"> Work</label>
+        <label><input type="checkbox" name="categories" value="Sleep"> Sleep</label>
+        <label><input type="checkbox" name="categories" value="Play"> Play</label>
+        <!-- Add more categories here as needed -->
+        <br><br>
+        <button type="submit">Apply Filter</button>
     </form>
+    
 
     <h2>Pie Chart</h2>
     <div>{{ pie_chart | safe }}</div>

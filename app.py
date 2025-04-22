@@ -7,25 +7,21 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def dashboard():
-    # Load CSV
     df = pd.read_csv('data.csv')
-    
-    # Get selected category from the dropdown (default: "all")
-    category_filter = request.form.get('category', 'all')
 
-    if category_filter != 'all':
-        df = df[df['Category'] == category_filter]
+    selected_categories = request.form.getlist('categories')  # Get list of selected checkboxes
 
-    # Create Pie Chart
+    if selected_categories:
+        df = df[df['Category'].isin(selected_categories)]
+
+    # Charts
     pie = px.pie(df, names='Category', values='Hours', title='Time Spent Per Category')
     pie_html = pie.to_html(full_html=False)
 
-    # Create Histogram
     hist = px.histogram(df, x='Category', y='Hours', title='Hours by Category', color='Category', histfunc='sum')
     hist.update_layout(bargap=0.2)
     hist_html = hist.to_html(full_html=False)
 
-    # Create Bar Chart
     bar = px.bar(df, x='Category', y='Hours', title='Time Spent by Category', color='Category', text='Hours')
     bar.update_traces(texttemplate='%{text}', textposition='outside', hoverinfo='x+y')
     bar_html = bar.to_html(full_html=False)
