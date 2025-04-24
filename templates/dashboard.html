@@ -3,37 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Flask Dashboard</title>
 </head>
 <body>
-    <h1>Analytics Dashboard</h1>
+    <div class="dashboard-container">
+        <h1>Analytics Dashboard</h1>
 
-    <!-- Dropdown for category filter -->
-    <form method="POST" action="/">
-        <label><input type="checkbox" name="categories" value="Work"> Work</label>
-        <label><input type="checkbox" name="categories" value="Sleep"> Sleep</label>
-        <label><input type="checkbox" name="categories" value="Play"> Play</label>
-        <!-- Add more categories here as needed -->
-        <label for="from_date">From:</label>
-        <input type="date" name="from_date" id="from_date">
+        <!-- Dropdown for category filter -->
+        <form method="POST" action="/">
+            <label><input type="checkbox" name="categories" value="Work"> Work</label>
+            <label><input type="checkbox" name="categories" value="Sleep"> Sleep</label>
+            <label><input type="checkbox" name="categories" value="Play"> Play</label><br><br>
         
-        <label for="to_date">To:</label>
-        <input type="date" name="to_date" id="to_date">
-        <br><br>
+            <label for="from_date">From:</label>
+            <input type="date" name="from_date" id="from_date">
         
-        <br><br>
-        <button type="submit">Apply Filter</button>
-    </form>
-    
+            <label for="to_date">To:</label>
+            <input type="date" name="to_date" id="to_date">
+        
+            <br><br>
+            <button type="submit">Apply Filter</button>
+        </form>
+        
 
-    <h2>Pie Chart</h2>
-    <div>{{ pie_chart | safe }}</div>
+        <h2>Pie Chart</h2>
+        <div>{{ pie_chart | safe }}</div>
 
-    <h2>Histogram</h2>
-    <div>{{ histogram | safe }}</div>
+        <h2>Histogram</h2>
+        <div>{{ histogram | safe }}</div>
 
-    <h2>Bar Chart</h2>
-    <div>{{ bar_chart | safe }}</div>
-
+        <h2>Bar Chart</h2>
+        <div>{{ bar_chart | safe }}</div>
+    </div>
 </body>
 </html>
